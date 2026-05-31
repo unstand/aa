@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/home/home",
+    "pages/vehicle/vehicle",
+    "pages/service/service",
+    "pages/schedule/schedule",
+    "pages/vehicle-detail/vehicle-detail",
+    "pages/service-detail/service-detail",
+    "pages/plan-detail/plan-detail",
+    "pages/contract/contract"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "探索旅行",
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "backgroundColor": "#1a1a2e"
+  },
+  "tabBar": {
+    "color": "#8e8e9a",
+    "selectedColor": "#4ecdc4",
+    "backgroundColor": "#1e1e32",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "主页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/vehicle/vehicle",
+        "text": "车辆",
+        "iconPath": "images/tab-car.png",
+        "selectedIconPath": "images/tab-car-active.png"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "附加服务",
+        "iconPath": "images/tab-service.png",
+        "selectedIconPath": "images/tab-service-active.png"
+      },
+      {
+        "pagePath": "pages/schedule/schedule",
+        "text": "行程",
+        "iconPath": "images/tab-calendar.png",
+        "selectedIconPath": "images/tab-calendar-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

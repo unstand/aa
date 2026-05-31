@@ -1,0 +1,112 @@
+<!--pages/service-detail/service-detail.wxml-->
+<view class="detail-page">
+  <scroll-view scroll-y class="content-scroll">
+    <!-- 服务产品信息 -->
+    <view class="product-section card" wx:if="{{service}}">
+      <view class="product-main">
+        <view class="product-img-wrap">
+          <view class="product-img-placeholder">
+            <text class="product-icon">🎒</text>
+          </view>
+        </view>
+        <view class="product-info">
+          <view class="product-title-row">
+            <text class="product-name">{{service.name}}</text>
+            <text class="dropdown-icon">▼</text>
+          </view>
+          <text class="product-items">{{service.items}}</text>
+        </view>
+      </view>
+
+      <!-- 数量与价格 -->
+      <view class="quantity-price-row">
+        <view class="quantity-selector">
+          <view class="btn-minus {{quantity <= 1 ? 'disabled' : ''}}" bindtap="onQuantityMinus">
+            <text>−</text>
+          </view>
+          <text class="quantity-value">{{quantity}}</text>
+          <view class="btn-plus" bindtap="onQuantityPlus">
+            <text>+</text>
+          </view>
+        </view>
+        <text class="unit-price">¥{{service.price}}/{{service.unit}}</text>
+      </view>
+
+      <!-- 时间选择 -->
+      <view class="date-section">
+        <view class="date-row">
+          <view class="date-item">
+            <text class="date-label">开始</text>
+            <text class="date-value">{{startDate}}</text>
+          </view>
+          <view class="date-duration">
+            <text class="duration-text">共 {{totalDays}} 日</text>
+          </view>
+          <view class="date-item">
+            <text class="date-label">结束</text>
+            <text class="date-value">{{endDate}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 地点信息 -->
+      <view class="location-section">
+        <view class="location-row">
+          <text class="location-label">城市</text>
+          <text class="location-value">{{city}}</text>
+        </view>
+        <view class="location-row">
+          <text class="location-label">取货点</text>
+          <text class="location-value">{{pickupPoint}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 套餐选择 -->
+    <view class="package-section card">
+      <text class="section-title">套餐选择</text>
+      <view class="package-options">
+        <view class="package-card {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{packageOptions}}" wx:key="id" 
+              bindtap="onSelectPackage" data-id="{{item.id}}">
+          <text class="package-name">{{item.name}}</text>
+          <text class="package-price-add">{{item.priceAdd > 0 ? '+¥' + item.priceAdd : '+¥0'}}</text>
+          <text class="package-items">{{service.items}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 使用须知 -->
+    <view class="notice-section card">
+      <view class="notice-header">
+        <text class="section-title">使用须知</text>
+        <view class="notice-underline"></view>
+      </view>
+      <view class="notice-content">
+        <view class="notice-img-placeholder">
+          <text class="notice-icon">📋</text>
+          <text class="notice-text">请在使用前仔细阅读使用说明和安全注意事项</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部留白 -->
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="price-info">
+      <text class="price-label">总价：</text>
+      <text class="price-value">¥{{totalPrice}}</text>
+    </view>
+    <view class="action-btns">
+      <view class="btn btn-contact" bindtap="onContactUs">
+        <text>联系我们</text>
+      </view>
+      <view class="btn btn-action" bindtap="onGeneratePlan">
+        <text>生成计划</text>
+      </view>
+    </view>
+  </view>
+</view>

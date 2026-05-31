@@ -1,0 +1,68 @@
+<!--pages/service/service.wxml-->
+<view class="service-page">
+  <!-- 搜索栏 -->
+   <!-- 搜索栏 -->
+   <view class="search-bar">
+  <view class="search-icon-wrap">
+    <!-- 如果有图标放这里，没有就留空 -->
+  </view>
+  <input 
+    class="search-input" 
+    placeholder="你在找什么服务？" 
+    placeholder-class="search-placeholder" 
+    bindinput="onSearchInput" 
+    value="{{searchKeyword}}" 
+  />
+  <!-- 右侧搜索图标 -->
+  <image 
+    class="search-icon"
+    src="/images/sousuo.png"
+    mode="aspectFit"
+  />
+  <!-- 右侧更多选项 -->
+  <view class="search-more" bindtap="onMoreMenu">
+    <!-- 如果你想模仿图片，这里可以不放内容 -->
+  </view>
+</view>
+
+  <view class="main-content">
+    <!-- 左侧分类导航 -->
+    <scroll-view scroll-y class="category-sidebar">
+      <view class="category-item {{activeCategory === index ? 'active' : ''}}" 
+            wx:for="{{categories}}" wx:key="index" 
+            bindtap="onCategoryTap" data-index="{{index}}">
+        <text class="cat-name">{{item.name}}</text>
+        <text class="cat-price">¥{{item.price}}起</text>
+        <view class="cat-underline" wx:if="{{activeCategory === index}}"></view>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧服务列表 -->
+    <scroll-view scroll-y class="service-list">
+      <view class="service-card" wx:for="{{filteredServices}}" wx:key="id" bindtap="onServiceTap" data-id="{{item.id}}">
+        <!-- 服务图片 -->
+        <view class="service-img">
+          <view class="service-img-placeholder">
+            <text class="service-icon">🎒</text>
+          </view>
+        </view>
+        <!-- 服务信息 -->
+        <view class="service-info">
+          <view class="service-header">
+            <view class="service-edition-tag">
+              <text class="edition-text">{{item.edition}} {{item.forCount}}</text>
+            </view>
+          </view>
+          <text class="service-items">{{item.items}}</text>
+          <text class="service-dimensions">尺寸：{{item.dimensions}}</text>
+          <text class="service-price">¥{{item.price}}/{{item.unit}}</text>
+        </view>
+      </view>
+
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{filteredServices.length === 0}}">
+        <text class="empty-text">暂无该类别服务</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

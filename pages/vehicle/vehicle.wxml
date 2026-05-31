@@ -1,0 +1,66 @@
+<!--pages/vehicle/vehicle.wxml-->
+<view class="vehicle-page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+  <view class="search-icon-wrap">
+    <!-- 如果有图标放这里，没有就留空 -->
+  </view>
+  <input 
+    class="search-input" 
+    placeholder="你在找什么车？" 
+    placeholder-class="search-placeholder" 
+    bindinput="onSearchInput" 
+    value="{{searchKeyword}}" 
+  />
+  <!-- 右侧搜索图标 -->
+  <image 
+    class="search-icon"
+    src="/images/sousuo.png"
+    mode="aspectFit"
+  />
+  <!-- 右侧更多选项 -->
+  <view class="search-more" bindtap="onMoreMenu">
+    <!-- 如果你想模仿图片，这里可以不放内容 -->
+  </view>
+</view>
+
+  <view class="main-content">
+    <!-- 左侧分类导航 -->
+    <scroll-view scroll-y class="category-sidebar">
+      <view class="category-item {{activeCategory === index ? 'active' : ''}}" 
+            wx:for="{{categories}}" wx:key="index" 
+            bindtap="onCategoryTap" data-index="{{index}}">
+        <text class="cat-name">{{item.name}}</text>
+        <text class="cat-price">¥{{item.price}}起</text>
+        <view class="cat-underline" wx:if="{{activeCategory === index}}"></view>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧车辆列表 -->
+    <scroll-view scroll-y class="vehicle-list">
+      <view class="vehicle-card" wx:for="{{filteredVehicles}}" wx:key="id" bindtap="onVehicleTap" data-id="{{item.id}}">
+        <!-- 车辆图片 -->
+        <view class="vehicle-img">
+          <view class="vehicle-img-placeholder">
+            <text class="vehicle-icon">🚗</text>
+          </view>
+        </view>
+        <!-- 车辆信息 -->
+        <view class="vehicle-info">
+          <text class="vehicle-name">{{item.name}}</text>
+          <text class="vehicle-specs">{{item.specs}}</text>
+          <text class="vehicle-features">{{item.features}}</text>
+          <view class="vehicle-tags">
+            <text class="tag tag-gray" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+          </view>
+          <text class="vehicle-price">¥{{item.price}}/{{item.unit}}</text>
+        </view>
+      </view>
+
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{filteredVehicles.length === 0}}">
+        <text class="empty-text">暂无该类别车辆</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

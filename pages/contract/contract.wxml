@@ -1,0 +1,169 @@
+<!--pages/contract/contract.wxml-->
+<view class="contract-page">
+  <scroll-view scroll-y class="content-scroll">
+    <!-- 合同标题 -->
+    <view class="contract-header">
+      <text class="contract-title">国内旅游服务合同</text>
+    </view>
+
+    <!-- 甲方信息 -->
+    <view class="section">
+      <text class="section-label">甲方（旅游者）：</text>
+      <view class="form-group">
+        <view class="form-row">
+          <text class="form-label">姓名：</text>
+          <input class="form-input" placeholder="请输入姓名" bindinput="onInputTravelerName" value="{{travelerName}}" />
+        </view>
+        <view class="form-row">
+          <text class="form-label">身份证号：</text>
+          <input class="form-input" placeholder="请输入身份证号" bindinput="onInputIdCard" value="{{travelerIdCard}}" />
+        </view>
+        <view class="form-row">
+          <text class="form-label">联系电话：</text>
+          <input class="form-input" type="number" placeholder="请输入联系电话" bindinput="onInputPhone" value="{{travelerPhone}}" />
+        </view>
+        <view class="form-row">
+          <text class="form-label">住址：</text>
+          <input class="form-input" placeholder="请输入住址" bindinput="onInputAddress" value="{{travelerAddress}}" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 乙方信息 -->
+    <view class="section">
+      <text class="section-label">乙方（旅行社）：</text>
+      <view class="form-group">
+        <view class="info-row">
+          <text class="form-label">公司简称：</text>
+          <text class="info-value">{{companyShortName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="form-label">统一社会信用代码：</text>
+          <text class="info-value">{{companyCreditCode}}</text>
+        </view>
+        <view class="info-row">
+          <text class="form-label">经营地址：</text>
+          <text class="info-value">{{companyAddress}}</text>
+        </view>
+        <view class="info-row">
+          <text class="form-label">联系电话：</text>
+          <text class="info-value">{{companyPhone}}</text>
+        </view>
+        <view class="info-row">
+          <text class="form-label">经营范围：</text>
+          <text class="info-value">{{companyScope}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 行程信息 -->
+    <view class="section">
+      <text class="section-subtitle">一、旅行行程信息</text>
+      <view class="form-group">
+        <view class="form-row">
+          <text class="form-label">出行人数：</text>
+          <input class="form-input" placeholder="请输入出行人数" bindinput="onInputCount" value="{{travelerCount}}" />
+        </view>
+        <view class="form-row">
+          <text class="form-label">出行时间：</text>
+          <text class="date-text">{{travelStartDate}} 至 {{travelEndDate}}，共计 {{travelDays}}天{{travelNights}}晚</text>
+        </view>
+        <view class="form-row">
+          <text class="form-label">出行线路：</text>
+          <input class="form-input" placeholder="请输入出行线路" bindinput="onInputRoute" value="{{travelRoute}}" />
+        </view>
+        <view class="form-row">
+          <text class="form-label">集合地点：</text>
+          <input class="form-input" placeholder="请输入集合地点" bindinput="onInputGatherPlace" value="{{gatherPlace}}" />
+        </view>
+        <view class="form-row">
+          <text class="form-label">集合时间：</text>
+          <text class="date-text">{{gatherTime}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 费用明细 -->
+    <view class="section">
+      <text class="section-subtitle">二、费用明细及支付</text>
+      <view class="form-group">
+        <view class="fee-row">
+          <text class="form-label">旅游总费用：</text>
+          <text class="fee-value">人民币 {{totalFee}} 元（大写：{{totalFeeUpper}}）</text>
+        </view>
+        <view class="fee-detail">
+          <text class="fee-detail-label">费用包含：</text>
+          <text class="fee-detail-text">{{feeIncludes}}</text>
+        </view>
+        <view class="fee-detail">
+          <text class="fee-detail-label">费用不含：</text>
+          <text class="fee-detail-text">{{feeExcludes}}</text>
+        </view>
+        <view class="form-row">
+          <text class="form-label">付款方式：</text>
+          <text class="date-text">{{paymentMethod}}</text>
+        </view>
+        <view class="form-row">
+          <text class="form-label">付款账户：</text>
+          <input class="form-input" placeholder="请输入付款账户" bindinput="onInputAccount" value="{{paymentAccount}}" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 双方权利义务 -->
+    <view class="section">
+      <text class="section-subtitle">三、双方权利义务</text>
+      
+      <!-- 甲方权利义务 -->
+      <view class="rights-section">
+        <text class="rights-title">甲方</text>
+        <view class="rights-list">
+          <view class="rights-item" wx:for="{{partyARights}}" wx:key="index">
+            <text class="rights-bullet">•</text>
+            <text class="rights-text">{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 乙方权利义务 -->
+      <view class="rights-section">
+        <text class="rights-title">乙方</text>
+        <view class="rights-list">
+          <view class="rights-item" wx:for="{{partyBRights}}" wx:key="index">
+            <text class="rights-bullet">•</text>
+            <text class="rights-text">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 协议确认 -->
+    <view class="agreement-section">
+      <view class="agreement-row" bindtap="onAgreeChange">
+        <view class="checkbox {{agreed ? 'checked' : ''}}">
+          <text class="checkbox-icon" wx:if="{{agreed}}">✓</text>
+        </view>
+        <text class="agreement-text">本人已阅读并同意以上合同条款</text>
+      </view>
+    </view>
+
+    <!-- 底部留白 -->
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="price-info">
+      <text class="price-label">总价：</text>
+      <text class="price-value">¥{{totalFee}}</text>
+    </view>
+    <view class="action-btns">
+      <view class="btn btn-contact" bindtap="onContactUs">
+        <text>联系我们</text>
+      </view>
+      <view class="btn btn-action" bindtap="onSignAndPay">
+        <text>签署并付费</text>
+      </view>
+    </view>
+  </view>
+</view>

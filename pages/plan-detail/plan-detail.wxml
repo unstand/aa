@@ -1,0 +1,130 @@
+<!--pages/plan-detail/plan-detail.wxml-->
+<view class="plan-detail-page">
+  <scroll-view scroll-y class="content-scroll">
+    <!-- 头部横幅 -->
+    <view class="hero-section" wx:if="{{plan}}">
+      <view class="hero-bg">
+        <text class="hero-icon">🏔️</text>
+      </view>
+      <view class="hero-overlay">
+        <text class="hero-title">{{plan.title}}</text>
+        <text class="hero-subtitle">{{plan.subtitle}}</text>
+        <view class="expand-btn" bindtap="onToggleExpand">
+          <text class="expand-icon">{{isExpanded ? '▲' : '▼'}}</text>
+        </view>
+      </view>
+      <text class="hero-desc" wx:if="{{isExpanded}}">{{plan.description}}</text>
+    </view>
+
+    <!-- 行程时间线 -->
+    <view class="timeline-section card">
+      <text class="section-title">行程安排</text>
+      <view class="timeline">
+        <view class="timeline-item" wx:for="{{itinerary}}" wx:key="day">
+          <view class="timeline-dot" style="background-color: {{item.color}};"></view>
+          <view class="timeline-line" wx:if="{{index < itinerary.length - 1}}"></view>
+          <view class="timeline-content">
+            <text class="day-tag" style="color: {{item.color}}; border-color: {{item.color}};">DAY-{{item.day}}</text>
+            <text class="day-title">{{item.title}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 活动亮点 -->
+    <view class="highlights-section card">
+      <view class="section-header-row">
+        <text class="section-title">活动亮点</text>
+        <view class="section-line"></view>
+      </view>
+      <view class="highlights-grid">
+        <view class="highlight-card" wx:for="{{highlights}}" wx:key="name">
+          <view class="highlight-img-placeholder">
+            <text class="highlight-icon">{{item.icon}}</text>
+          </view>
+          <text class="highlight-name">{{item.name}}</text>
+          <text class="highlight-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 路线地图 -->
+    <view class="route-section card">
+      <text class="section-title">路线地图</text>
+      <view class="route-map-placeholder">
+        <view class="route-line"></view>
+        <view class="route-points">
+          <view class="route-point" wx:for="{{routePoints}}" wx:key="name">
+            <text class="route-point-icon">{{item.icon}}</text>
+            <text class="route-point-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="route-info">
+        <text class="route-time">行程时间：5月15日—9月10日，共117天</text>
+        <text class="route-distance">预计总里程约2300km</text>
+      </view>
+    </view>
+
+    <!-- 推荐车辆 -->
+    <view class="vehicles-section card">
+      <text class="section-title">推荐车辆</text>
+      <view class="vehicle-list">
+        <view class="vehicle-item" wx:for="{{vehicleItems}}" wx:key="id" bindtap="onVehicleTap" data-id="{{item.id}}">
+          <view class="vehicle-img-sm">
+            <text class="vehicle-sm-icon">🚗</text>
+          </view>
+          <view class="vehicle-info-sm">
+            <text class="vehicle-name-sm">{{item.name}}</text>
+            <text class="vehicle-price-sm">¥{{item.price}}/天</text>
+          </view>
+          <view class="vehicle-action">
+            <view class="btn-book" bindtap="onBookVehicle" data-id="{{item.id}}">
+              <text class="book-text">预约车辆</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐服务 -->
+    <view class="services-section card">
+      <text class="section-title">推荐服务</text>
+      <view class="service-list">
+        <view class="service-item" wx:for="{{serviceItems}}" wx:key="id" bindtap="onServiceTap" data-id="{{item.id}}">
+          <view class="service-img-sm">
+            <text class="service-sm-icon">🎒</text>
+          </view>
+          <view class="service-info-sm">
+            <text class="service-name-sm">{{item.name}}</text>
+            <text class="service-price-sm">¥{{item.price}}/日</text>
+          </view>
+          <view class="service-action">
+            <view class="btn-modify">
+              <text class="modify-text">修改预算</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部留白 -->
+    <view class="safe-bottom"></view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="price-info">
+      <text class="price-label">价格：</text>
+      <text class="price-value">¥{{totalPrice}}</text>
+    </view>
+    <view class="action-btns">
+      <view class="btn btn-contact" bindtap="onContactUs">
+        <text>联系我们</text>
+      </view>
+      <view class="btn btn-action" bindtap="onGeneratePlan">
+        <text>生成计划</text>
+      </view>
+    </view>
+  </view>
+</view>

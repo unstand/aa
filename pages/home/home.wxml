@@ -1,0 +1,153 @@
+<!--pages/home/home.wxml-->
+<!-- 背景图 -->
+<image
+  class="bg-image"
+  src="/images/home-bj.png"
+  mode="aspectFill"
+></image>
+<!-- 蒙层 -->
+<view class="mask"></view>
+<view class="home-page">
+<!-- Logo -->
+<image
+    class="moon-logo"
+    src="/images/logo.png"
+    mode="aspectFit"
+  ></image>
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+  <view class="search-icon-wrap">
+    <!-- 如果有图标放这里，没有就留空 -->
+  </view>
+  <input 
+    class="search-input" 
+    placeholder="你有什么计划？" 
+    placeholder-class="search-placeholder" 
+    bindinput="onSearchInput" 
+    value="{{searchKeyword}}" 
+  />
+  <!-- 右侧搜索图标 -->
+  <image 
+    class="search-icon"
+    src="/images/sousuo.png"
+    mode="aspectFit"
+  />
+  <!-- 右侧更多选项 -->
+  <view class="search-more" bindtap="onMoreMenu">
+    <!-- 如果你想模仿图片，这里可以不放内容 -->
+  </view>
+</view>
+
+  <scroll-view scroll-y class="content-scroll">
+    <!-- 当季热门计划 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">当季热门计划：</text>
+      </view>
+      <scroll-view scroll-x class="plan-scroll" enhanced show-scrollbar="{{false}}">
+        <view class="plan-cards">
+          <view class="plan-card" wx:for="{{plans}}" wx:key="id" bindtap="onPlanTap" data-id="{{item.id}}">
+            <!-- 封面图 -->
+            <view class="plan-cover">
+              <view class="plan-cover-placeholder">
+                <text class="cover-icon">🏔️</text>
+              </view>
+              <view class="plan-price-tag">
+                <text class="price-text">¥{{item.price}}/{{item.unit}}</text>
+              </view>
+            </view>
+            <!-- 标签 -->
+            <view class="plan-tags">
+              <text class="tag {{index === 0 ? 'tag-red' : 'tag-gray'}}" wx:for="{{item.tags}}" wx:for-item="tag" wx:for-index="index" wx:key="index">{{tag}}</text>
+            </view>
+            <!-- 描述 -->
+            <view class="plan-desc">
+              <text class="desc-text">{{item.description}}</text>
+            </view>
+            <!-- 底部信息 -->
+            <view class="plan-footer">
+              <text class="plan-duration">{{item.days}}天{{item.nights}}晚 | {{item.distance}}</text>
+              <view class="plan-rating">
+                <text class="rating-text">{{item.rating}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- DIY定制计划 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">DIY定制计划：</text>
+      </view>
+      <view class="diy-card" bindtap="onGoDIY">
+        <view class="diy-bg">
+          <text class="diy-bg-icon">❄️</text>
+        </view>
+        <view class="diy-content">
+          <text class="diy-desc">在游玩中根据自己的喜好定制目的地，车辆及领队及额外服务</text>
+          <view class="diy-btn">
+            <text class="diy-btn-text">前往定制</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 中亚游 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">中亚游：</text>
+      </view>
+      <view class="plan-card central-asia-card" wx:for="{{centralAsiaPlans}}" wx:key="id">
+        <!-- 封面图 -->
+        <view class="plan-cover" bindtap="onCentralAsiaTap" data-id="{{item.id}}">
+          <view class="plan-cover-placeholder central-asia-cover">
+            <text class="cover-icon">🏛️</text>
+          </view>
+          <view class="plan-price-tag">
+            <text class="price-text">¥{{item.price}}/{{item.unit}}</text>
+          </view>
+        </view>
+        <!-- 标签 -->
+        <view class="plan-tags">
+          <text class="tag {{index === 0 ? 'tag-red' : 'tag-gray'}}" wx:for="{{item.tags}}" wx:for-item="tag" wx:for-index="index" wx:key="index">{{tag}}</text>
+        </view>
+        <!-- 描述 -->
+        <view class="plan-desc">
+          <text class="desc-text">{{item.description}}</text>
+        </view>
+        <!-- 底部操作 -->
+        <view class="central-asia-footer">
+          <view class="login-prompt" bindtap="onCentralAsiaTap" data-id="{{item.id}}">
+            <view class="btn-primary login-now-btn">
+              <text class="login-now-text">立即登录</text>
+            </view>
+          </view>
+          <view class="close-btn" catchtap="">
+            <text class="close-text">✕</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部留白 -->
+    <view style="height: 30rpx;"></view>
+  </scroll-view>
+
+  <!-- 登录弹窗 -->
+  <view class="modal-mask" wx:if="{{showLoginModal}}" bindtap="onCloseLoginModal">
+    <view class="modal-content" catchtap="">
+      <text class="modal-title">需要登录</text>
+      <text class="modal-desc">请先登录后查看详细计划</text>
+      <view class="modal-btns">
+        <view class="btn-secondary modal-cancel" bindtap="onCloseLoginModal">
+          <text>取消</text>
+        </view>
+        <view class="btn-primary modal-confirm" bindtap="onGoLogin">
+          <text>去登录</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

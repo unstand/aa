@@ -1,0 +1,81 @@
+/* pages/vehicle-detail/vehicle-detail.wxss */
+.detail-page { min-height: 100vh; background-color: #1a1a2e; }
+.content-scroll { height: calc(100vh - 100rpx); padding: 16rpx 32rpx; }
+
+/* 车辆信息 */
+.vehicle-section { margin-bottom: 16rpx; }
+.vehicle-main { display: flex; margin-bottom: 16rpx; }
+.vehicle-img-wrap { width: 208rpx; height: 160rpx; border-radius: 16rpx; overflow: hidden; margin-right: 16rpx; flex-shrink: 0; }
+.vehicle-img-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #3d3d5c, #2d2d44); display: flex; align-items: center; justify-content: center; }
+.vehicle-icon { font-size: 64rpx; }
+.vehicle-info { flex: 1; }
+.vehicle-name { font-size: 32rpx; color: #ffffff; font-weight: bold; display: block; margin-bottom: 4rpx; }
+.vehicle-specs { font-size: 20rpx; color: #a0a0b0; display: block; margin-bottom: 4rpx; }
+.vehicle-features { font-size: 20rpx; color: #8e8e9a; display: block; margin-bottom: 8rpx; }
+.vehicle-tags { display: flex; gap: 8rpx; }
+
+/* 数量价格 */
+.quantity-price-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16rpx; }
+.quantity-selector { display: flex; align-items: center; gap: 16rpx; }
+.btn-minus, .btn-plus { width: 48rpx; height: 48rpx; border-radius: 50%; background-color: #3d3d5c; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 32rpx; }
+.btn-minus.disabled { opacity: 0.3; }
+.quantity-value { font-size: 32rpx; color: #ffffff; font-weight: bold; min-width: 40rpx; text-align: center; }
+.unit-price { font-size: 32rpx; color: #ff6b6b; font-weight: bold; }
+
+/* 日期 */
+.date-section { background-color: #232340; border-radius: 16rpx; padding: 16rpx; margin-bottom: 16rpx; }
+.date-row { display: flex; align-items: center; justify-content: space-between; }
+.date-item { flex: 1; }
+.date-label { font-size: 20rpx; color: #8e8e9a; display: block; margin-bottom: 4rpx; }
+.date-value { font-size: 24rpx; color: #4ecdc4; }
+.date-duration { padding: 4rpx 12rpx; background-color: rgba(78,205,196,0.15); border-radius: 16rpx; }
+.duration-text { font-size: 20rpx; color: #4ecdc4; }
+
+/* 地点 */
+.location-section { background-color: #232340; border-radius: 16rpx; padding: 12rpx 16rpx; }
+.location-row { display: flex; align-items: center; padding: 8rpx 0; }
+.location-label { font-size: 24rpx; color: #8e8e9a; width: 112rpx; }
+.location-value { font-size: 24rpx; color: #ffffff; }
+
+/* 驾驶员 */
+.driver-section { margin-bottom: 16rpx; }
+.section-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16rpx; }
+.section-title { font-size: 28rpx; color: #ffffff; font-weight: bold; }
+.view-all-text { font-size: 24rpx; color: #4ecdc4; }
+.add-driver-btn { border: 2rpx dashed rgba(255,255,255,0.2); border-radius: 16rpx; padding: 24rpx; text-align: center; margin-bottom: 16rpx; }
+.add-driver-text { font-size: 28rpx; color: #8e8e9a; }
+.driver-notice { background-color: #232340; border-radius: 16rpx; padding: 12rpx 16rpx; }
+.notice-text { font-size: 20rpx; color: #8e8e9a; line-height: 1.6; }
+
+/* 保险 */
+.insurance-section { margin-bottom: 16rpx; }
+.insurance-title-row { display: flex; align-items: baseline; gap: 8rpx; }
+.insurance-provider { font-size: 20rpx; color: #8e8e9a; }
+.insurance-table { width: 100%; overflow-x: auto; }
+.table-row { display: flex; margin-bottom: 4rpx; }
+.table-header { margin-bottom: 8rpx; }
+.table-cell { flex: 1; padding: 8rpx 4rpx; text-align: center; }
+.cell-label { flex: 0.8; text-align: left; }
+.cell-label-text { font-size: 20rpx; color: #8e8e9a; }
+.plan-name { font-size: 24rpx; color: #ffffff; font-weight: bold; display: block; margin-bottom: 4rpx; }
+.plan-price { font-size: 20rpx; color: #4ecdc4; display: block; margin-bottom: 4rpx; }
+.plan-status { font-size: 20rpx; color: #4ecdc4; background-color: rgba(78,205,196,0.15); padding: 2rpx 8rpx; border-radius: 8rpx; }
+.cell-value-text { font-size: 20rpx; color: #a0a0b0; line-height: 1.4; }
+.table-cell.selected { background-color: rgba(78,205,196,0.05); border-radius: 8rpx; }
+.table-cell.selected .cell-value-text { color: #4ecdc4; }
+.cell-btn { padding-top: 8rpx; }
+.select-btn { display: inline-block; padding: 8rpx 24rpx; border: 2rpx solid rgba(255,255,255,0.2); border-radius: 24rpx; }
+.select-btn.active { background: linear-gradient(135deg, #4ecdc4, #44a08d); border-color: #4ecdc4; }
+.select-btn-text { font-size: 24rpx; color: #ffffff; }
+
+.safe-bottom { height: 120rpx; }
+
+/* 底部操作栏 */
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; padding: 16rpx 32rpx; padding-bottom: calc(16rpx + env(safe-area-inset-bottom)); background-color: #1e1e32; z-index: 100; }
+.price-info { flex: 1; }
+.price-label { font-size: 24rpx; color: #8e8e9a; }
+.price-value { font-size: 40rpx; color: #ff6b6b; font-weight: bold; }
+.action-btns { display: flex; gap: 16rpx; }
+.btn { padding: 16rpx 32rpx; border-radius: 24rpx; font-size: 28rpx; font-weight: bold; white-space: nowrap; color: #ffffff; }
+.btn-contact { background-color: #3d5a80; }
+.btn-action { background: linear-gradient(135deg, #4ecdc4, #44a08d); }

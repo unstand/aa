@@ -1,0 +1,74 @@
+/* pages/plan-detail/plan-detail.wxss */
+.plan-detail-page { min-height: 100vh; background-color: #1a1a2e; }
+.content-scroll { height: calc(100vh - 100rpx); }
+
+/* 头部 */
+.hero-section { position: relative; height: 432rpx; overflow: hidden; }
+.hero-bg { width: 100%; height: 100%; background: linear-gradient(135deg, #2d3a4a, #1a2636); display: flex; align-items: center; justify-content: center; }
+.hero-icon { font-size: 112rpx; }
+.hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32rpx; background: linear-gradient(transparent, rgba(0,0,0,0.7)); }
+.hero-title { font-size: 40rpx; color: #ffffff; font-weight: bold; display: block; margin-bottom: 8rpx; }
+.hero-subtitle { font-size: 28rpx; color: rgba(255,255,255,0.8); display: block; margin-bottom: 8rpx; }
+.expand-btn { display: inline-flex; }
+.expand-icon { font-size: 24rpx; color: rgba(255,255,255,0.6); }
+.hero-desc { padding: 0 32rpx 16rpx; font-size: 24rpx; color: rgba(255,255,255,0.7); line-height: 1.6; position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+
+/* 时间线 */
+.timeline-section { margin: 16rpx 32rpx; }
+.section-title { font-size: 28rpx; color: #ffffff; font-weight: bold; margin-bottom: 16rpx; display: block; }
+.timeline { position: relative; padding-left: 32rpx; }
+.timeline-item { position: relative; padding-bottom: 24rpx; }
+.timeline-dot { position: absolute; left: -32rpx; top: 6rpx; width: 16rpx; height: 16rpx; border-radius: 50%; z-index: 2; }
+.timeline-line { position: absolute; left: -25rpx; top: 22rpx; width: 2rpx; height: calc(100% - 16rpx); background-color: rgba(255,255,255,0.1); }
+.timeline-content { display: flex; align-items: center; gap: 16rpx; }
+.day-tag { font-size: 20rpx; font-weight: bold; padding: 4rpx 8rpx; border: 2rpx solid; border-radius: 8rpx; white-space: nowrap; }
+.day-title { font-size: 28rpx; color: #ffffff; }
+
+/* 亮点 */
+.highlights-section { margin: 0 32rpx 16rpx; }
+.section-header-row { display: flex; align-items: center; gap: 16rpx; margin-bottom: 16rpx; }
+.section-line { flex: 1; height: 1rpx; background-color: rgba(255,255,255,0.1); }
+.highlights-grid { display: flex; gap: 16rpx; }
+.highlight-card { flex: 1; background-color: #232340; border-radius: 16rpx; overflow: hidden; text-align: center; }
+.highlight-img-placeholder { height: 144rpx; background: linear-gradient(135deg, #3d3d5c, #2d2d44); display: flex; align-items: center; justify-content: center; }
+.highlight-icon { font-size: 56rpx; }
+.highlight-name { font-size: 24rpx; color: #ffffff; font-weight: bold; display: block; padding: 8rpx 8rpx 4rpx; }
+.highlight-desc { font-size: 20rpx; color: #8e8e9a; display: block; padding: 0 8rpx 8rpx; }
+
+/* 路线 */
+.route-section { margin: 0 32rpx 16rpx; }
+.route-map-placeholder { background-color: #232340; border-radius: 16rpx; padding: 24rpx; position: relative; min-height: 176rpx; margin-bottom: 16rpx; }
+.route-line { position: absolute; top: 50%; left: 24rpx; right: 24rpx; height: 4rpx; background: linear-gradient(90deg, #4ecdc4, #44a08d, #4ecdc4); border-radius: 2rpx; }
+.route-points { display: flex; justify-content: space-between; position: relative; z-index: 1; }
+.route-point { display: flex; flex-direction: column; align-items: center; gap: 8rpx; }
+.route-point-icon { font-size: 32rpx; }
+.route-point-name { font-size: 20rpx; color: #a0a0b0; }
+.route-info { display: flex; flex-direction: column; gap: 4rpx; }
+.route-time { font-size: 20rpx; color: #8e8e9a; }
+.route-distance { font-size: 20rpx; color: #8e8e9a; }
+
+/* 车辆/服务列表 */
+.vehicles-section, .services-section { margin: 0 32rpx 16rpx; }
+.vehicle-list, .service-list { display: flex; flex-direction: column; gap: 16rpx; }
+.vehicle-item, .service-item { display: flex; align-items: center; background-color: #232340; border-radius: 16rpx; padding: 16rpx; }
+.vehicle-img-sm, .service-img-sm { width: 96rpx; height: 72rpx; background: linear-gradient(135deg, #3d3d5c, #2d2d44); border-radius: 16rpx; display: flex; align-items: center; justify-content: center; margin-right: 16rpx; flex-shrink: 0; }
+.vehicle-sm-icon, .service-sm-icon { font-size: 32rpx; }
+.vehicle-info-sm, .service-info-sm { flex: 1; }
+.vehicle-name-sm, .service-name-sm { font-size: 24rpx; color: #ffffff; font-weight: bold; display: block; margin-bottom: 4rpx; }
+.vehicle-price-sm, .service-price-sm { font-size: 24rpx; color: #ff6b6b; }
+.vehicle-action, .service-action { flex-shrink: 0; }
+.btn-book { padding: 8rpx 24rpx; background: linear-gradient(135deg, #4ecdc4, #44a08d); border-radius: 24rpx; }
+.book-text { font-size: 20rpx; color: #ffffff; font-weight: bold; }
+.btn-modify { padding: 8rpx 24rpx; border: 2rpx solid rgba(255,255,255,0.2); border-radius: 24rpx; }
+.modify-text { font-size: 20rpx; color: #ffffff; }
+
+.safe-bottom { height: 120rpx; }
+
+.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; padding: 16rpx 32rpx; padding-bottom: calc(16rpx + env(safe-area-inset-bottom)); background-color: #1e1e32; z-index: 100; }
+.price-info { flex: 1; }
+.price-label { font-size: 24rpx; color: #8e8e9a; }
+.price-value { font-size: 40rpx; color: #ff6b6b; font-weight: bold; }
+.action-btns { display: flex; gap: 16rpx; }
+.btn { padding: 16rpx 32rpx; border-radius: 24rpx; font-size: 28rpx; font-weight: bold; white-space: nowrap; color: #ffffff; }
+.btn-contact { background-color: #3d5a80; }
+.btn-action { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
