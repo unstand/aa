@@ -10,10 +10,11 @@ Page({
     travelerAddress: '',
     // 乙方（旅行社）信息
     companyShortName: '探索旅行',
+    companyName: '探索旅行国际旅行社有限公司',
     companyCreditCode: '91650100MA7XXXXX',
     companyAddress: '新疆喀什市解放北路XX号',
     companyPhone: '4001234567',
-    companyScope: '国内旅游业务、入境旅游业务',
+    companyScope: '国内旅游业务',
     // 行程信息
     travelerCount: '',
     travelStartDate: '2025年8月15日',
@@ -26,8 +27,8 @@ Page({
     // 费用信息
     totalFee: 1750,
     totalFeeUpper: '壹仟柒佰伍拾',
-    feeIncludes: '交通费、住宿费、景区首道门票、正餐费等，导游服务费。',
-    feeExcludes: '当地用车；导游不参入；个人消费、自费项目，往返出发地交通、单人房差、意外伤害医疗保险。',
+    feeIncludes: '交通费、住宿费、景区首道门票、正餐餐费、导游服务费、当地用车。',
+    feeExcludes: '个人消费、自费项目、往返出发地交通、单人房差、意外伤病医疗费用。',
     paymentMethod: '签约当日一次性付清',
     paymentAccount: '',
     // 甲方权利义务

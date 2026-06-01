@@ -142,28 +142,31 @@ App({
         id: 'basic',
         name: '基本保障',
         price: 17,
+        costDisplay: '¥17/日 已含',
         features: {
-          damage: '1500元以内自付，不包含轮胎裂纹',
+          damage: '1500元以内自付\n不包含轮胎轮毂',
           thirdParty: '50万',
           depreciation: '车损5000以下免收',
-          operationLoss: '不免税'
+          operationLoss: '不收费'
         }
       },
       {
         id: 'upgrade',
         name: '升级服务',
         price: 50,
+        costDisplay: '+¥50/日',
         features: {
-          damage: '全额赔付，不含轮胎裂纹',
+          damage: '全额赔付\n不含轮胎轮毂',
           thirdParty: '100万',
           depreciation: '车损5000以下免收',
-          operationLoss: '不免税'
+          operationLoss: '不收费'
         }
       },
       {
         id: 'premium',
         name: '尊享服务',
         price: 80,
+        costDisplay: '+¥80/日',
         features: {
           damage: '全额赔付',
           thirdParty: '200万',

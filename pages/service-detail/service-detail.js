@@ -11,8 +11,9 @@ Page({
     city: '喀什',
     pickupPoint: '喀什机场T1航站楼',
     packageOptions: [
-      { id: 'standard', name: '标准包', priceAdd: 0, selected: true },
-      { id: 'upgrade', name: '升级包', priceAdd: 15, selected: false }
+      { id: 'standard', name: '标准包', priceAdd: 0, items: '' },
+      { id: 'upgrade', name: '升级包', priceAdd: 15, items: '' },
+      { id: 'premium', name: '尊享包', priceAdd: 30, items: '' }
     ],
     selectedPackage: 'standard',
     totalPrice: 0
@@ -22,7 +23,12 @@ Page({
     const id = parseInt(options.id) || 1
     const services = app.globalData.services
     const service = services.find(s => s.id === id) || services[0]
-    this.setData({ service })
+    // 为每个套餐选项设置项目内容
+    const packageOptions = this.data.packageOptions.map(p => ({
+      ...p,
+      items: service.items
+    }))
+    this.setData({ service, packageOptions })
     this.calculateTotal()
   },
 
@@ -40,13 +46,7 @@ Page({
 
   onSelectPackage(e) {
     const id = e.currentTarget.dataset.id
-    this.setData({
-      selectedPackage: id,
-      packageOptions: this.data.packageOptions.map(p => ({
-        ...p,
-        selected: p.id === id
-      }))
-    })
+    this.setData({ selectedPackage: id })
     this.calculateTotal()
   },
 

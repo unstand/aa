@@ -11,7 +11,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 24rpx;
+  padding: 0 40rpx;
   padding-top: calc(88rpx + env(safe-area-inset-top));
   padding-bottom: 20rpx;
   z-index: 10;
@@ -24,7 +24,7 @@
   height: 52rpx;
   background-color: rgba(255, 251, 246, 0.12);
   border-radius: 26rpx;
-  padding: 0 20rpx;
+  padding: 0 24rpx;
 }
 
 .search-input {
@@ -132,7 +132,7 @@
 .service-list {
   flex: 1;
   height: 100%;
-  padding: 0 20rpx;
+  padding: 0 24rpx;
 }
 
 .service-card {

@@ -1,55 +1,305 @@
 /* pages/contract/contract.wxss */
-.contract-page { min-height: 100vh; background-color: #1a1a2e; }
-.content-scroll { height: calc(100vh - 100rpx); padding: 16rpx 32rpx; }
+.contract-page {
+  min-height: 100vh;
+  background-color: #1a1a2e;
+}
 
-/* 合同标题 */
-.contract-header { text-align: center; padding: 24rpx 0 32rpx; }
-.contract-title { font-size: 40rpx; color: #ffffff; font-weight: bold; letter-spacing: 4rpx; }
+.content-scroll {
+  height: calc(100vh - 120rpx);
+  padding: 20rpx 40rpx;
+}
 
-/* 区块 */
-.section { margin-bottom: 16rpx; background-color: #2d2d44; border-radius: 24rpx; padding: 16rpx; }
-.section-label { font-size: 28rpx; color: #4ecdc4; font-weight: bold; display: block; margin-bottom: 16rpx; }
-.section-subtitle { font-size: 28rpx; color: #4ecdc4; font-weight: bold; display: block; margin-bottom: 16rpx; }
+/* ===== 合同标题 ===== */
+.contract-header {
+  text-align: center;
+  padding: 24rpx 0 36rpx;
+}
 
-/* 表单 */
-.form-group { display: flex; flex-direction: column; gap: 12rpx; }
-.form-row { display: flex; align-items: center; gap: 8rpx; }
-.form-label { font-size: 24rpx; color: #a0a0b0; white-space: nowrap; min-width: 160rpx; }
-.form-input { flex: 1; font-size: 24rpx; color: #ffffff; background-color: #232340; border-radius: 8rpx; padding: 8rpx 12rpx; border: 1rpx solid rgba(255,255,255,0.08); }
-.info-row { display: flex; align-items: baseline; gap: 8rpx; }
-.info-value { font-size: 24rpx; color: #ffffff; flex: 1; }
-.date-text { font-size: 24rpx; color: #a0a0b0; flex: 1; }
+.contract-title {
+  font-size: 40rpx;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 6rpx;
+  display: block;
+  margin-bottom: 20rpx;
+  font-family: "HarmonyOS Sans";
+}
 
-/* 费用 */
-.fee-row { display: flex; align-items: baseline; gap: 8rpx; margin-bottom: 12rpx; }
-.fee-value { font-size: 28rpx; color: #ff6b6b; font-weight: bold; flex: 1; }
-.fee-detail { margin-bottom: 8rpx; }
-.fee-detail-label { font-size: 20rpx; color: #a0a0b0; display: block; margin-bottom: 4rpx; }
-.fee-detail-text { font-size: 20rpx; color: #8e8e9a; line-height: 1.6; }
+.contract-no {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
 
-/* 权利义务 */
-.rights-section { margin-bottom: 16rpx; }
-.rights-title { font-size: 24rpx; color: #ffd93d; font-weight: bold; display: block; margin-bottom: 8rpx; }
-.rights-list { display: flex; flex-direction: column; gap: 8rpx; }
-.rights-item { display: flex; align-items: flex-start; gap: 8rpx; }
-.rights-bullet { font-size: 24rpx; color: #4ecdc4; line-height: 1.6; }
-.rights-text { font-size: 24rpx; color: #a0a0b0; line-height: 1.6; flex: 1; }
+.no-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.4);
+}
 
-/* 协议 */
-.agreement-section { margin: 16rpx 0; padding: 16rpx; }
-.agreement-row { display: flex; align-items: center; gap: 12rpx; }
-.checkbox { width: 32rpx; height: 32rpx; border: 2rpx solid rgba(255,255,255,0.3); border-radius: 4rpx; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s; }
-.checkbox.checked { background-color: #4ecdc4; border-color: #4ecdc4; }
-.checkbox-icon { font-size: 20rpx; color: #ffffff; font-weight: bold; }
-.agreement-text { font-size: 24rpx; color: #a0a0b0; }
+.no-line {
+  width: 200rpx;
+  height: 1rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+}
 
-.safe-bottom { height: 120rpx; }
+/* ===== 区块 ===== */
+.section {
+  background-color: rgba(45, 45, 68, 0.7);
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
 
-.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; padding: 16rpx 32rpx; padding-bottom: calc(16rpx + env(safe-area-inset-bottom)); background-color: #1e1e32; z-index: 100; }
-.price-info { flex: 1; }
-.price-label { font-size: 24rpx; color: #8e8e9a; }
-.price-value { font-size: 40rpx; color: #ff6b6b; font-weight: bold; }
-.action-btns { display: flex; gap: 16rpx; }
-.btn { padding: 16rpx 32rpx; border-radius: 24rpx; font-size: 28rpx; font-weight: bold; white-space: nowrap; color: #ffffff; }
-.btn-contact { background-color: #3d5a80; }
-.btn-action { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
+.section-label {
+  font-size: 26rpx;
+  color: #4ecdc4;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 16rpx;
+  font-family: "HarmonyOS Sans";
+}
+
+.section-subtitle {
+  font-size: 26rpx;
+  color: #4ecdc4;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 16rpx;
+  font-family: "HarmonyOS Sans";
+}
+
+/* ===== 表单 ===== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.form-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+  min-width: 140rpx;
+}
+
+.form-line {
+  flex: 1;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 6rpx;
+}
+
+.form-input {
+  font-size: 24rpx;
+  color: #ffffff;
+  width: 100%;
+}
+
+.info-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+}
+
+.info-value {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.8);
+  flex: 1;
+}
+
+/* ===== 合同正文 ===== */
+.contract-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.contract-text text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+}
+
+.sub-heading {
+  color: rgba(255, 217, 61, 0.85) !important;
+  font-weight: 500;
+  margin-top: 6rpx;
+}
+
+.fee-label {
+  color: rgba(255, 255, 255, 0.55) !important;
+  font-size: 20rpx !important;
+  margin-top: 4rpx;
+}
+
+.fee-content {
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 20rpx !important;
+  padding-left: 16rpx;
+}
+
+/* 行内下划线 */
+.inline-line {
+  display: inline-block;
+  width: 120rpx;
+  height: 1rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  vertical-align: middle;
+  margin: 0 4rpx;
+}
+
+.inline-line.short {
+  width: 80rpx;
+}
+
+.inline-line.mini {
+  width: 50rpx;
+}
+
+/* ===== 签字区域 ===== */
+.sign-area {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 20rpx;
+}
+
+.sign-label {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+}
+
+.sign-line {
+  flex: 1;
+  height: 1rpx;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sign-line.short {
+  width: 80rpx;
+  flex: none;
+}
+
+.sign-line.mini {
+  width: 50rpx;
+  flex: none;
+}
+
+.sign-text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== 协议确认 ===== */
+.agreement-section {
+  margin: 20rpx 0;
+  padding: 16rpx 0;
+}
+
+.agreement-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.checkbox {
+  width: 36rpx;
+  height: 36rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.25);
+  border-radius: 6rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.checkbox.checked {
+  background-color: #4ecdc4;
+  border-color: #4ecdc4;
+}
+
+.checkbox-icon {
+  font-size: 22rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.agreement-text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.safe-bottom {
+  height: 140rpx;
+}
+
+/* ===== 底部操作栏 ===== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 40rpx;
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+  background-color: rgba(30, 30, 50, 0.95);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.bar-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.bar-price-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bar-price-value {
+  font-size: 38rpx;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: "HarmonyOS Sans";
+}
+
+.bar-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.bar-btn {
+  padding: 16rpx 36rpx;
+  border-radius: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar-btn text {
+  font-size: 26rpx;
+  color: #ffffff;
+  white-space: nowrap;
+  font-weight: 500;
+  font-family: "HarmonyOS Sans";
+}
+
+.bar-btn-contact {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.bar-btn-action {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
