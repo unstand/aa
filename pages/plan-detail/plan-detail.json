@@ -1,5 +1,6 @@
 {
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#1a1a2e",
-  "navigationBarTitleText": "计划详情"
+  "navigationBarTitleText": "计划详情",
+  "navigationStyle": "custom"
 }

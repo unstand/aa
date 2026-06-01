@@ -1,109 +1,284 @@
 <!--pages/plan-detail/plan-detail.wxml-->
 <view class="plan-detail-page">
-  <scroll-view scroll-y class="content-scroll">
-    <!-- 头部横幅 -->
-    <view class="hero-section" wx:if="{{plan}}">
-      <view class="hero-bg">
-        <text class="hero-icon">🏔️</text>
-      </view>
-      <view class="hero-overlay">
-        <text class="hero-title">{{plan.title}}</text>
-        <text class="hero-subtitle">{{plan.subtitle}}</text>
-        <view class="expand-btn" bindtap="onToggleExpand">
-          <text class="expand-icon">{{isExpanded ? '▲' : '▼'}}</text>
+
+  <!-- 自定义导航栏（沉浸式，仅保留状态栏占位） -->
+  <view class="custom-navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="navbar-status" style="height: {{statusBarHeight}}px;"></view>
+    <view class="navbar-content" style="height: {{navBarHeight}}px;">
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="content-scroll" style="height: calc(100vh - 120rpx);">
+
+    <!-- ========== 1. 顶部大图轮播 ========== -->
+    <view class="swiper-section">
+      <swiper class="plan-swiper" current="{{currentSwiper}}" bindchange="onSwiperChange" circular autoplay interval="4000">
+        <swiper-item wx:for="{{swiperList}}" wx:key="id">
+          <view class="swiper-image-wrap">
+            <view class="swiper-img-placeholder">
+              <text class="swiper-icon">🏔️</text>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+      <!-- 渐变蒙版 -->
+      <view class="swiper-overlay"></view>
+      <!-- 标题文字覆盖在图上 -->
+      <view class="swiper-text-overlay">
+        <text class="swiper-title">塔吉克恶魔之眼探秘</text>
+        <view class="swiper-desc-block">
+          <text class="swiper-desc-line">冰川之父慕士塔格峰覆盖着皑皑白雪</text>
+          <text class="swiper-desc-line">塔克拉玛干沙漠里无边际的黄沙席卷万物</text>
+          <text class="swiper-desc-line">奥依塔克冰川复刻瑞士童话</text>
         </view>
       </view>
-      <text class="hero-desc" wx:if="{{isExpanded}}">{{plan.description}}</text>
+      <!-- 分页指示器 -->
+      <view class="swiper-dots">
+        <view class="swiper-dot {{currentSwiper === index ? 'active' : ''}}" wx:for="{{swiperList}}" wx:key="id"></view>
+      </view>
     </view>
 
-    <!-- 行程时间线 -->
-    <view class="timeline-section card">
-      <text class="section-title">行程安排</text>
-      <view class="timeline">
-        <view class="timeline-item" wx:for="{{itinerary}}" wx:key="day">
-          <view class="timeline-dot" style="background-color: {{item.color}};"></view>
-          <view class="timeline-line" wx:if="{{index < itinerary.length - 1}}"></view>
-          <view class="timeline-content">
-            <text class="day-tag" style="color: {{item.color}}; border-color: {{item.color}};">DAY-{{item.day}}</text>
-            <text class="day-title">{{item.title}}</text>
+    <!-- ========== 2. 人数 + 价格行 ========== -->
+    <view class="price-people-row">
+      <view class="people-group">
+        <text class="people-label">人数</text>
+        <view class="qty-row">
+          <view class="qty-btn {{adultCount <= 1 ? 'disabled' : ''}}" bindtap="onAdultMinus">
+            <text class="qty-btn-text">−</text>
+          </view>
+          <text class="qty-val">{{adultCount}}</text>
+          <view class="qty-btn" bindtap="onAdultPlus">
+            <text class="qty-btn-text">+</text>
           </view>
         </view>
       </view>
+      <text class="price-per-person">¥{{pricePerPerson}}/人</text>
     </view>
 
-    <!-- 活动亮点 -->
-    <view class="highlights-section card">
+    <!-- ========== 3. 日期选择行 ========== -->
+    <view class="date-row">
+      <view class="date-block" bindtap="onStartDatePicker">
+        <text class="date-main">{{startDate}}</text>
+        <text class="date-arrow-down">▼</text>
+        <text class="date-sub">{{startWeek}}</text>
+      </view>
+      <view class="date-duration">
+        <text class="duration-text">共 {{totalDays}} 日</text>
+      </view>
+      <view class="date-block" bindtap="onEndDatePicker">
+        <text class="date-main">{{endDate}}</text>
+        <text class="date-arrow-down">▼</text>
+        <text class="date-sub">{{endWeek}}</text>
+      </view>
+    </view>
+
+    <!-- ========== 4. 城市 + 出发点 ========== -->
+    <view class="location-row">
+      <view class="location-card" bindtap="onCityChange">
+        <text class="location-label">城市</text>
+        <text class="location-value">{{city}}</text>
+      </view>
+      <view class="location-card" bindtap="onPickupChange">
+        <text class="location-label">出发点</text>
+        <text class="location-value">{{pickupPoint}}</text>
+      </view>
+    </view>
+
+    <!-- ========== 5. 行程信息卡片（设计稿） ========== -->
+    <view class="info-card" wx:if="{{plan}}">
+      <view class="info-header">
+        <text class="info-title">{{plan.title}}</text>
+        <view class="info-meta">
+          <text class="info-meta-item">{{plan.days}}天{{plan.nights}}晚</text>
+          <text class="info-meta-divider">|</text>
+          <text class="info-meta-item">{{plan.distance}}</text>
+        </view>
+      </view>
+      <text class="info-subtitle">{{plan.subtitle}}</text>
+      <view class="info-actions">
+        <view class="btn-book-outline" bindtap="onBookTrip">
+          <text class="btn-book-outline-text">预订</text>
+        </view>
+        <view class="btn-book-fill" bindtap="onBookTrip">
+          <text class="btn-book-fill-icon">✦</text>
+          <text class="btn-book-fill-text">预订</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ========== 6. 车辆卡片 ========== -->
+    <view class="trip-card">
+      <view class="card-badge">
+        <text class="card-badge-letter">车</text>
+      </view>
+      <view class="card-content">
+        <view class="card-title-row">
+          <text class="card-title">{{vehicle.name}}</text>
+          <text class="card-year">2025款</text>
+        </view>
+        <text class="card-specs">{{vehicle.specs}}</text>
+        <text class="card-features">{{vehicle.features}}</text>
+      </view>
+      <view class="card-footer">
+        <text class="card-price">¥{{vehicle.price}}/{{vehicle.unit}}</text>
+        <view class="card-qty-row">
+          <view class="qty-btn-sm {{vehicle.quantity <= 1 ? 'disabled' : ''}}" bindtap="onVehicleMinus">
+            <text class="qty-btn-sm-text">−</text>
+          </view>
+          <text class="qty-val-sm">{{vehicle.quantity}}</text>
+          <view class="qty-btn-sm" bindtap="onVehiclePlus">
+            <text class="qty-btn-sm-text">+</text>
+          </view>
+        </view>
+        <view class="card-action-btn" bindtap="onModifyVehicle">
+          <text class="card-action-text">修改车辆</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ========== 7. 服务卡片 ========== -->
+    <view class="trip-card">
+      <view class="card-badge badge-service">
+        <text class="card-badge-letter">服</text>
+      </view>
+      <view class="card-content">
+        <view class="card-title-row">
+          <text class="card-title">{{service.name}}</text>
+          <text class="card-year">{{service.edition}} {{service.forCount}}</text>
+        </view>
+        <text class="card-specs">{{service.items}}</text>
+      </view>
+      <view class="card-footer">
+        <text class="card-price">¥{{service.price}}/{{service.unit}}</text>
+        <view class="card-qty-row">
+          <view class="qty-btn-sm {{service.quantity <= 1 ? 'disabled' : ''}}" bindtap="onServiceMinus">
+            <text class="qty-btn-sm-text">−</text>
+          </view>
+          <text class="qty-val-sm">{{service.quantity}}</text>
+          <view class="qty-btn-sm" bindtap="onServicePlus">
+            <text class="qty-btn-sm-text">+</text>
+          </view>
+        </view>
+        <view class="card-action-btn" bindtap="onModifyService">
+          <text class="card-action-text">修改服务</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ========== 8. 添加额外服务 ========== -->
+    <view class="add-extra-btn" bindtap="onAddExtra">
+      <text class="add-extra-text">+ 添加额外服务包</text>
+    </view>
+
+    <!-- ========== 9. Hero Banner 主视觉区 ========== -->
+    <view class="hero-banner">
+      <view class="hero-banner-bg">
+        <text class="hero-banner-icon">🚙</text>
+      </view>
+      <view class="hero-banner-overlay">
+        <view class="hero-banner-tag">#春夏之趣 | 捕捉自然灵感</view>
+        <text class="hero-banner-title">越野西行</text>
+        <text class="hero-banner-title-2">凝望恶魔之眼</text>
+        <view class="hero-banner-desc">
+          <text class="hero-banner-desc-line">每赴苍凉的帕米尔高原</text>
+          <text class="hero-banner-desc-line">奔赴大吉火山群的旷世之约。</text>
+          <text class="hero-banner-desc-line">3800米海拔之上，大地裂开深邃眼眸</text>
+          <text class="hero-banner-desc-line">内环碧潭如墨玉凝光，外环疏横彩华层叠绵延</text>
+          <text class="hero-banner-desc-line">荒野、火山、湿地、雪山在此相拥。</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- ========== 10. 标签页导航 ========== -->
+    <view class="tabs-bar">
+      <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="onTabChange" data-index="0">
+        <text class="tab-text">活动</text>
+        <view class="tab-underline" wx:if="{{currentTab === 0}}"></view>
+      </view>
+      <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="onTabChange" data-index="1">
+        <text class="tab-text">详细日程</text>
+        <view class="tab-underline" wx:if="{{currentTab === 1}}"></view>
+      </view>
+      <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="onTabChange" data-index="2">
+        <text class="tab-text">费用须知</text>
+        <view class="tab-underline" wx:if="{{currentTab === 2}}"></view>
+      </view>
+    </view>
+
+    <!-- ========== 11. 日程安排 ========== -->
+    <view class="itinerary-section">
       <view class="section-header-row">
         <text class="section-title">活动亮点</text>
         <view class="section-line"></view>
       </view>
+      <view class="itinerary-list">
+        <view class="itinerary-item" wx:for="{{itinerary}}" wx:key="day">
+          <view class="itinerary-left">
+            <view class="day-badge" style="background-color: {{item.color}};">
+              <text class="day-badge-text">DAY-{{item.day}}</text>
+            </view>
+            <view class="itinerary-line" wx:if="{{index < itinerary.length - 1}}"></view>
+          </view>
+          <view class="itinerary-right">
+            <view class="itinerary-icon-wrap">
+              <text class="itinerary-icon">{{item.icon}}</text>
+            </view>
+            <view class="itinerary-info">
+              <text class="itinerary-title">{{item.title}}</text>
+              <text class="itinerary-desc">{{item.desc}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- ========== 12. 路线地图 ========== -->
+    <view class="route-section">
+      <view class="route-map-container">
+        <!-- 路线虚线 -->
+        <view class="route-winding-path">
+          <view class="route-segment" wx:for="{{routePoints}}" wx:key="name">
+            <view class="route-node">
+              <view class="route-dot">
+                <text class="route-dot-icon">{{item.icon}}</text>
+              </view>
+              <text class="route-node-name">{{item.name}}</text>
+              <text class="route-node-note">{{item.note}}</text>
+            </view>
+            <view class="route-connector" wx:if="{{index < routePoints.length - 1}}">
+              <view class="connector-line"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- ========== 13. 亮点图文网格 ========== -->
+    <view class="highlights-section">
       <view class="highlights-grid">
         <view class="highlight-card" wx:for="{{highlights}}" wx:key="name">
-          <view class="highlight-img-placeholder">
+          <view class="highlight-img">
             <text class="highlight-icon">{{item.icon}}</text>
           </view>
-          <text class="highlight-name">{{item.name}}</text>
-          <text class="highlight-desc">{{item.desc}}</text>
-        </view>
-      </view>
-    </view>
-
-    <!-- 路线地图 -->
-    <view class="route-section card">
-      <text class="section-title">路线地图</text>
-      <view class="route-map-placeholder">
-        <view class="route-line"></view>
-        <view class="route-points">
-          <view class="route-point" wx:for="{{routePoints}}" wx:key="name">
-            <text class="route-point-icon">{{item.icon}}</text>
-            <text class="route-point-name">{{item.name}}</text>
-          </view>
-        </view>
-      </view>
-      <view class="route-info">
-        <text class="route-time">行程时间：5月15日—9月10日，共117天</text>
-        <text class="route-distance">预计总里程约2300km</text>
-      </view>
-    </view>
-
-    <!-- 推荐车辆 -->
-    <view class="vehicles-section card">
-      <text class="section-title">推荐车辆</text>
-      <view class="vehicle-list">
-        <view class="vehicle-item" wx:for="{{vehicleItems}}" wx:key="id" bindtap="onVehicleTap" data-id="{{item.id}}">
-          <view class="vehicle-img-sm">
-            <text class="vehicle-sm-icon">🚗</text>
-          </view>
-          <view class="vehicle-info-sm">
-            <text class="vehicle-name-sm">{{item.name}}</text>
-            <text class="vehicle-price-sm">¥{{item.price}}/天</text>
-          </view>
-          <view class="vehicle-action">
-            <view class="btn-book" bindtap="onBookVehicle" data-id="{{item.id}}">
-              <text class="book-text">预约车辆</text>
-            </view>
+          <view class="highlight-info">
+            <text class="highlight-name">{{item.name}}</text>
+            <text class="highlight-desc">{{item.desc}}</text>
           </view>
         </view>
       </view>
     </view>
 
-    <!-- 推荐服务 -->
-    <view class="services-section card">
-      <text class="section-title">推荐服务</text>
-      <view class="service-list">
-        <view class="service-item" wx:for="{{serviceItems}}" wx:key="id" bindtap="onServiceTap" data-id="{{item.id}}">
-          <view class="service-img-sm">
-            <text class="service-sm-icon">🎒</text>
-          </view>
-          <view class="service-info-sm">
-            <text class="service-name-sm">{{item.name}}</text>
-            <text class="service-price-sm">¥{{item.price}}/日</text>
-          </view>
-          <view class="service-action">
-            <view class="btn-modify">
-              <text class="modify-text">修改预算</text>
-            </view>
-          </view>
+    <!-- ========== 14. 底部信息区 ========== -->
+    <view class="footer-info-section">
+      <view class="footer-time-row">
+        <text class="footer-time-label">TIME:</text>
+        <text class="footer-time-value">{{footerInfo.time}}</text>
+      </view>
+      <text class="footer-note">{{footerInfo.note}}</text>
+      <view class="footer-includes">
+        <view class="include-item" wx:for="{{footerInfo.includes}}" wx:key="*this">
+          <text class="include-icon">{{item === '交通' ? '🚗' : item === '住宿' ? '🏨' : item === '餐饮' ? '🍽️' : item === '保险' ? '🛡️' : '📋'}}</text>
+          <text class="include-text">{{item}}</text>
         </view>
       </view>
     </view>
@@ -112,18 +287,18 @@
     <view class="safe-bottom"></view>
   </scroll-view>
 
-  <!-- 底部操作栏 -->
+  <!-- ========== 底部操作栏 ========== -->
   <view class="bottom-bar">
-    <view class="price-info">
-      <text class="price-label">价格：</text>
-      <text class="price-value">¥{{totalPrice}}</text>
+    <view class="bar-price">
+      <text class="bar-price-label">总价：</text>
+      <text class="bar-price-value">¥{{totalPrice}}</text>
     </view>
-    <view class="action-btns">
-      <view class="btn btn-contact" bindtap="onContactUs">
-        <text>联系我们</text>
+    <view class="bar-actions">
+      <view class="bar-btn bar-btn-contact" bindtap="onContactUs">
+        <text class="bar-btn-text">联系我们</text>
       </view>
-      <view class="btn btn-action" bindtap="onGeneratePlan">
-        <text>生成计划</text>
+      <view class="bar-btn bar-btn-free" bindtap="onFreePlan">
+        <text class="bar-btn-text">free 三亚计划</text>
       </view>
     </view>
   </view>

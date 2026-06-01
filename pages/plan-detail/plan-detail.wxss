@@ -1,74 +1,937 @@
 /* pages/plan-detail/plan-detail.wxss */
-.plan-detail-page { min-height: 100vh; background-color: #1a1a2e; }
-.content-scroll { height: calc(100vh - 100rpx); }
 
-/* 头部 */
-.hero-section { position: relative; height: 432rpx; overflow: hidden; }
-.hero-bg { width: 100%; height: 100%; background: linear-gradient(135deg, #2d3a4a, #1a2636); display: flex; align-items: center; justify-content: center; }
-.hero-icon { font-size: 112rpx; }
-.hero-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32rpx; background: linear-gradient(transparent, rgba(0,0,0,0.7)); }
-.hero-title { font-size: 40rpx; color: #ffffff; font-weight: bold; display: block; margin-bottom: 8rpx; }
-.hero-subtitle { font-size: 28rpx; color: rgba(255,255,255,0.8); display: block; margin-bottom: 8rpx; }
-.expand-btn { display: inline-flex; }
-.expand-icon { font-size: 24rpx; color: rgba(255,255,255,0.6); }
-.hero-desc { padding: 0 32rpx 16rpx; font-size: 24rpx; color: rgba(255,255,255,0.7); line-height: 1.6; position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+/* ==================== 页面容器 ==================== */
+.plan-detail-page {
+  min-height: 100vh;
+  background-color: #1a1a2e;
+  position: relative;
+}
 
-/* 时间线 */
-.timeline-section { margin: 16rpx 32rpx; }
-.section-title { font-size: 28rpx; color: #ffffff; font-weight: bold; margin-bottom: 16rpx; display: block; }
-.timeline { position: relative; padding-left: 32rpx; }
-.timeline-item { position: relative; padding-bottom: 24rpx; }
-.timeline-dot { position: absolute; left: -32rpx; top: 6rpx; width: 16rpx; height: 16rpx; border-radius: 50%; z-index: 2; }
-.timeline-line { position: absolute; left: -25rpx; top: 22rpx; width: 2rpx; height: calc(100% - 16rpx); background-color: rgba(255,255,255,0.1); }
-.timeline-content { display: flex; align-items: center; gap: 16rpx; }
-.day-tag { font-size: 20rpx; font-weight: bold; padding: 4rpx 8rpx; border: 2rpx solid; border-radius: 8rpx; white-space: nowrap; }
-.day-title { font-size: 28rpx; color: #ffffff; }
+/* ==================== 自定义导航栏（沉浸式） ==================== */
+.custom-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: transparent;
+}
+.navbar-status {
+  width: 100%;
+}
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  width: 100%;
+}
+.navbar-back {
+  padding: 8rpx;
+}
+.back-icon-wrap {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-icon {
+  font-size: 44rpx;
+  color: #ffffff;
+  font-weight: 300;
+  line-height: 1;
+  margin-top: -4rpx;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.navbar-more {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.more-dots {
+  font-size: 24rpx;
+  color: #ffffff;
+  letter-spacing: 2rpx;
+}
+.navbar-circle {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.circle-icon {
+  font-size: 30rpx;
+  color: #ffffff;
+}
+.content-scroll {
+  height: calc(100vh - 120rpx);
+}
 
-/* 亮点 */
-.highlights-section { margin: 0 32rpx 16rpx; }
-.section-header-row { display: flex; align-items: center; gap: 16rpx; margin-bottom: 16rpx; }
-.section-line { flex: 1; height: 1rpx; background-color: rgba(255,255,255,0.1); }
-.highlights-grid { display: flex; gap: 16rpx; }
-.highlight-card { flex: 1; background-color: #232340; border-radius: 16rpx; overflow: hidden; text-align: center; }
-.highlight-img-placeholder { height: 144rpx; background: linear-gradient(135deg, #3d3d5c, #2d2d44); display: flex; align-items: center; justify-content: center; }
-.highlight-icon { font-size: 56rpx; }
-.highlight-name { font-size: 24rpx; color: #ffffff; font-weight: bold; display: block; padding: 8rpx 8rpx 4rpx; }
-.highlight-desc { font-size: 20rpx; color: #8e8e9a; display: block; padding: 0 8rpx 8rpx; }
+/* ==================== 1. 顶部大图轮播 ==================== */
+.swiper-section {
+  position: relative;
+  width: 100%;
+  height: 580rpx;
+}
+.plan-swiper {
+  width: 100%;
+  height: 580rpx;
+}
+.swiper-image-wrap {
+  width: 100%;
+  height: 100%;
+}
+.swiper-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(170deg, #4a6d8c 0%, #2a4a6a 20%, #1a3050 45%, #0d2040 70%, #1a2a3a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.swiper-img-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 30%;
+  background: linear-gradient(180deg, rgba(200,220,240,0.15) 0%, rgba(180,200,220,0.08) 40%, transparent 100%);
+  border-radius: 20rpx;
+}
+.swiper-icon {
+  font-size: 180rpx;
+  opacity: 0.25;
+  filter: grayscale(0.3);
+}
+/* 底部渐变蒙版 */
+.swiper-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300rpx;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(26, 26, 46, 0.3) 30%,
+    rgba(26, 26, 46, 0.7) 60%,
+    rgba(26, 26, 46, 0.95) 100%
+  );
+  pointer-events: none;
+}
+/* 文字覆盖层 */
+.swiper-text-overlay {
+  position: absolute;
+  bottom: 56rpx;
+  left: 32rpx;
+  right: 32rpx;
+  z-index: 5;
+}
+.swiper-title {
+  font-size: 42rpx;
+  color: #ffffff;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 16rpx;
+  text-shadow: 0 2rpx 12rpx rgba(0,0,0,0.6);
+  letter-spacing: 2rpx;
+}
+.swiper-desc-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+.swiper-desc-line {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  display: block;
+  line-height: 1.6;
+}
+/* 分页点 */
+.swiper-dots {
+  position: absolute;
+  bottom: 16rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12rpx;
+  z-index: 6;
+}
+.swiper-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 6rpx;
+  background-color: rgba(255, 255, 255, 0.35);
+  transition: all 0.3s ease;
+}
+.swiper-dot.active {
+  width: 32rpx;
+  background-color: #ffffff;
+}
 
-/* 路线 */
-.route-section { margin: 0 32rpx 16rpx; }
-.route-map-placeholder { background-color: #232340; border-radius: 16rpx; padding: 24rpx; position: relative; min-height: 176rpx; margin-bottom: 16rpx; }
-.route-line { position: absolute; top: 50%; left: 24rpx; right: 24rpx; height: 4rpx; background: linear-gradient(90deg, #4ecdc4, #44a08d, #4ecdc4); border-radius: 2rpx; }
-.route-points { display: flex; justify-content: space-between; position: relative; z-index: 1; }
-.route-point { display: flex; flex-direction: column; align-items: center; gap: 8rpx; }
-.route-point-icon { font-size: 32rpx; }
-.route-point-name { font-size: 20rpx; color: #a0a0b0; }
-.route-info { display: flex; flex-direction: column; gap: 4rpx; }
-.route-time { font-size: 20rpx; color: #8e8e9a; }
-.route-distance { font-size: 20rpx; color: #8e8e9a; }
+/* ==================== 2. 人数 + 价格行 ==================== */
+.price-people-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 32rpx;
+  background-color: #1e1e32;
+}
+.people-group {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.people-label {
+  font-size: 28rpx;
+  color: #c0c0c8;
+  font-weight: bold;
+}
+.qty-row {
+  display: flex;
+  align-items: center;
+  background-color: #2d2d44;
+  border-radius: 14rpx;
+  padding: 4rpx;
+  gap: 4rpx;
+}
+.qty-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 12rpx;
+  background-color: #3d3d5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn.disabled {
+  opacity: 0.25;
+}
+.qty-btn-text {
+  font-size: 32rpx;
+  color: #ffffff;
+  font-weight: 500;
+}
+.qty-val {
+  font-size: 30rpx;
+  color: #ffffff;
+  font-weight: bold;
+  min-width: 56rpx;
+  text-align: center;
+}
+.price-per-person {
+  font-size: 34rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
 
-/* 车辆/服务列表 */
-.vehicles-section, .services-section { margin: 0 32rpx 16rpx; }
-.vehicle-list, .service-list { display: flex; flex-direction: column; gap: 16rpx; }
-.vehicle-item, .service-item { display: flex; align-items: center; background-color: #232340; border-radius: 16rpx; padding: 16rpx; }
-.vehicle-img-sm, .service-img-sm { width: 96rpx; height: 72rpx; background: linear-gradient(135deg, #3d3d5c, #2d2d44); border-radius: 16rpx; display: flex; align-items: center; justify-content: center; margin-right: 16rpx; flex-shrink: 0; }
-.vehicle-sm-icon, .service-sm-icon { font-size: 32rpx; }
-.vehicle-info-sm, .service-info-sm { flex: 1; }
-.vehicle-name-sm, .service-name-sm { font-size: 24rpx; color: #ffffff; font-weight: bold; display: block; margin-bottom: 4rpx; }
-.vehicle-price-sm, .service-price-sm { font-size: 24rpx; color: #ff6b6b; }
-.vehicle-action, .service-action { flex-shrink: 0; }
-.btn-book { padding: 8rpx 24rpx; background: linear-gradient(135deg, #4ecdc4, #44a08d); border-radius: 24rpx; }
-.book-text { font-size: 20rpx; color: #ffffff; font-weight: bold; }
-.btn-modify { padding: 8rpx 24rpx; border: 2rpx solid rgba(255,255,255,0.2); border-radius: 24rpx; }
-.modify-text { font-size: 20rpx; color: #ffffff; }
+/* ==================== 3. 日期选择行 ==================== */
+.date-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 16rpx 32rpx 20rpx;
+  background-color: #1e1e32;
+  gap: 12rpx;
+}
+.date-block {
+  flex: 1;
+  background-color: #2d2d44;
+  border-radius: 14rpx;
+  padding: 18rpx 16rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6rpx;
+}
+.date-main {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.date-arrow-down {
+  font-size: 18rpx;
+  color: #8e8e9a;
+  margin-left: 4rpx;
+}
+.date-sub {
+  width: 100%;
+  font-size: 22rpx;
+  color: #8e8e9a;
+  margin-top: 4rpx;
+}
+.date-duration {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.duration-text {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: bold;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  padding: 10rpx 18rpx;
+  border-radius: 12rpx;
+  white-space: nowrap;
+}
 
-.safe-bottom { height: 120rpx; }
+/* ==================== 4. 城市 + 出发点 ==================== */
+.location-row {
+  display: flex;
+  gap: 12rpx;
+  padding: 0 32rpx 28rpx;
+  background-color: #1e1e32;
+}
+.location-card {
+  flex: 1;
+  background-color: #2d2d44;
+  border-radius: 14rpx;
+  padding: 18rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+.location-label {
+  font-size: 22rpx;
+  color: #8e8e9a;
+}
+.location-value {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
 
-.bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; padding: 16rpx 32rpx; padding-bottom: calc(16rpx + env(safe-area-inset-bottom)); background-color: #1e1e32; z-index: 100; }
-.price-info { flex: 1; }
-.price-label { font-size: 24rpx; color: #8e8e9a; }
-.price-value { font-size: 40rpx; color: #ff6b6b; font-weight: bold; }
-.action-btns { display: flex; gap: 16rpx; }
-.btn { padding: 16rpx 32rpx; border-radius: 24rpx; font-size: 28rpx; font-weight: bold; white-space: nowrap; color: #ffffff; }
-.btn-contact { background-color: #3d5a80; }
-.btn-action { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
+/* ==================== 5. 行程信息卡片 ==================== */
+.info-card {
+  margin: 24rpx 24rpx 0;
+  background-color: #2d2d44;
+  border-radius: 24rpx;
+  padding: 28rpx;
+}
+.info-header {
+  margin-bottom: 8rpx;
+}
+.info-title {
+  font-size: 36rpx;
+  color: #ffffff;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8rpx;
+}
+.info-meta {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.info-meta-item {
+  font-size: 24rpx;
+  color: #c0c0c8;
+}
+.info-meta-divider {
+  font-size: 24rpx;
+  color: #4e4e60;
+}
+.info-subtitle {
+  font-size: 24rpx;
+  color: #8e8e9a;
+  display: block;
+  margin-bottom: 24rpx;
+  line-height: 1.6;
+}
+.info-actions {
+  display: flex;
+  gap: 16rpx;
+}
+.btn-book-outline {
+  flex: 1;
+  height: 76rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid rgba(255, 255, 255, 0.25);
+  border-radius: 16rpx;
+}
+.btn-book-outline-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.btn-book-fill {
+  flex: 1;
+  height: 76rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  border-radius: 16rpx;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+.btn-book-fill-icon {
+  font-size: 24rpx;
+  color: #ffffff;
+}
+.btn-book-fill-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* ==================== 6 & 7. 行程卡片（车辆+服务） ==================== */
+.trip-card {
+  margin: 16rpx 24rpx;
+  background-color: #2d2d44;
+  border-radius: 24rpx;
+  padding: 24rpx 24rpx 20rpx;
+  position: relative;
+}
+/* 左上角徽章 */
+.card-badge {
+  position: absolute;
+  top: -2rpx;
+  left: 24rpx;
+  width: 56rpx;
+  height: 32rpx;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border-radius: 0 0 12rpx 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-badge.badge-service {
+  background: linear-gradient(135deg, #ffd93d, #f0a500);
+}
+.card-badge-letter {
+  font-size: 20rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+/* 卡片内容 */
+.card-content {
+  padding-top: 20rpx;
+}
+.card-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+.card-title {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.card-year {
+  font-size: 22rpx;
+  color: #8e8e9a;
+}
+.card-specs {
+  font-size: 22rpx;
+  color: #c0c0c8;
+  display: block;
+  margin-bottom: 6rpx;
+  line-height: 1.6;
+}
+.card-features {
+  font-size: 22rpx;
+  color: #8e8e9a;
+  display: block;
+  line-height: 1.6;
+}
+/* 卡片底部 */
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 20rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.06);
+}
+.card-price {
+  font-size: 28rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.card-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  margin-left: auto;
+}
+.qty-btn-sm {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 12rpx;
+  background-color: #3d3d5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qty-btn-sm.disabled {
+  opacity: 0.3;
+}
+.qty-btn-sm-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.qty-val-sm {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+  min-width: 40rpx;
+  text-align: center;
+}
+.card-action-btn {
+  padding: 8rpx 20rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  flex-shrink: 0;
+}
+.card-action-text {
+  font-size: 22rpx;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* ==================== 8. 添加额外服务按钮 ==================== */
+.add-extra-btn {
+  margin: 8rpx 24rpx 24rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d2d44;
+  border-radius: 16rpx;
+  border: 2rpx dashed rgba(255, 255, 255, 0.15);
+}
+.add-extra-text {
+  font-size: 26rpx;
+  color: #8e8e9a;
+  font-weight: bold;
+}
+
+/* ==================== 9. Hero Banner 主视觉区 ==================== */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 560rpx;
+  overflow: hidden;
+}
+.hero-banner-bg {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #2a1f0d 0%, #1a2636 35%, #3d2b1f 60%, #1a3a5c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-banner-icon {
+  font-size: 180rpx;
+  opacity: 0.3;
+}
+.hero-banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32rpx;
+  background: linear-gradient(transparent 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.85) 100%);
+}
+.hero-banner-tag {
+  display: inline-block;
+  font-size: 22rpx;
+  color: #ffd93d;
+  background-color: rgba(255, 217, 61, 0.15);
+  border: 1rpx solid rgba(255, 217, 61, 0.3);
+  border-radius: 8rpx;
+  padding: 4rpx 12rpx;
+  margin-bottom: 16rpx;
+}
+.hero-banner-title {
+  font-size: 48rpx;
+  color: #ffffff;
+  font-weight: bold;
+  display: block;
+  text-shadow: 0 4rpx 16rpx rgba(0,0,0,0.6);
+  line-height: 1.2;
+}
+.hero-banner-title-2 {
+  font-size: 44rpx;
+  color: #ffd93d;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 16rpx;
+  text-shadow: 0 2rpx 12rpx rgba(0,0,0,0.5);
+}
+.hero-banner-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+.hero-banner-desc-line {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.7;
+}
+
+/* ==================== 10. 标签页导航 ==================== */
+.tabs-bar {
+  display: flex;
+  background-color: #1e1e32;
+  border-bottom: 1rpx solid rgba(255, 255, 255, 0.06);
+}
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 0 16rpx;
+  position: relative;
+}
+.tab-text {
+  font-size: 28rpx;
+  color: #8e8e9a;
+  font-weight: bold;
+}
+.tab-item.active .tab-text {
+  color: #ffffff;
+}
+.tab-underline {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 6rpx;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border-radius: 3rpx;
+}
+
+/* ==================== 11. 日程安排 ==================== */
+.itinerary-section {
+  padding: 32rpx 24rpx 8rpx;
+}
+.section-header-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+.section-title {
+  font-size: 32rpx;
+  color: #ffffff;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.section-line {
+  flex: 1;
+  height: 1rpx;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.itinerary-list {
+  display: flex;
+  flex-direction: column;
+}
+.itinerary-item {
+  display: flex;
+  gap: 20rpx;
+  padding-bottom: 24rpx;
+}
+.itinerary-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+.day-badge {
+  padding: 6rpx 14rpx;
+  border-radius: 10rpx;
+  min-width: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.day-badge-text {
+  font-size: 22rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.itinerary-line {
+  width: 2rpx;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin: 8rpx 0;
+}
+.itinerary-right {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  background-color: #2d2d44;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+.itinerary-icon-wrap {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 14rpx;
+  background-color: #3d3d5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.itinerary-icon {
+  font-size: 28rpx;
+}
+.itinerary-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+.itinerary-title {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.itinerary-desc {
+  font-size: 24rpx;
+  color: #8e8e9a;
+  line-height: 1.5;
+}
+
+/* ==================== 12. 路线地图 ==================== */
+.route-section {
+  padding: 16rpx 24rpx;
+}
+.route-map-container {
+  background-color: #232340;
+  border-radius: 24rpx;
+  padding: 32rpx 24rpx;
+  position: relative;
+}
+.route-winding-path {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.route-segment {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+.route-node {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  flex: 1;
+}
+.route-dot {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 4rpx solid #232340;
+  box-shadow: 0 0 0 4rpx rgba(78, 205, 196, 0.2);
+}
+.route-dot-icon {
+  font-size: 24rpx;
+}
+.route-node-name {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.route-node-note {
+  font-size: 20rpx;
+  color: #8e8e9a;
+  margin-left: auto;
+}
+.route-connector {
+  padding-left: 25rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.connector-line {
+  width: 2rpx;
+  height: 100%;
+  background: repeating-linear-gradient(
+    180deg,
+    #4ecdc4 0,
+    #4ecdc4 8rpx,
+    transparent 8rpx,
+    transparent 16rpx
+  );
+  margin-left: 25rpx;
+}
+
+/* ==================== 13. 亮点图文网格 ==================== */
+.highlights-section {
+  padding: 16rpx 24rpx;
+}
+.highlights-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.highlight-card {
+  width: calc(50% - 8rpx);
+  background-color: #2d2d44;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.highlight-img {
+  height: 160rpx;
+  background: linear-gradient(135deg, #3d3d5c, #2d2d44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.highlight-icon {
+  font-size: 60rpx;
+}
+.highlight-info {
+  padding: 12rpx 16rpx;
+}
+.highlight-name {
+  font-size: 24rpx;
+  color: #ffffff;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4rpx;
+}
+.highlight-desc {
+  font-size: 20rpx;
+  color: #8e8e9a;
+  display: block;
+}
+
+/* ==================== 14. 底部信息区 ==================== */
+.footer-info-section {
+  padding: 24rpx 24rpx 16rpx;
+}
+.footer-time-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 10rpx;
+}
+.footer-time-label {
+  font-size: 24rpx;
+  color: #8e8e9a;
+  font-weight: bold;
+}
+.footer-time-value {
+  font-size: 24rpx;
+  color: #4ecdc4;
+  font-weight: bold;
+}
+.footer-note {
+  font-size: 20rpx;
+  color: #8e8e9a;
+  display: block;
+  margin-bottom: 20rpx;
+  line-height: 1.6;
+}
+.footer-includes {
+  display: flex;
+  justify-content: space-around;
+  background-color: #2d2d44;
+  border-radius: 16rpx;
+  padding: 24rpx 12rpx;
+}
+.include-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.include-icon {
+  font-size: 36rpx;
+}
+.include-text {
+  font-size: 22rpx;
+  color: #c0c0c8;
+}
+
+/* ==================== 底部留白 ==================== */
+.safe-bottom {
+  height: 140rpx;
+}
+
+/* ==================== 底部操作栏 ==================== */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background-color: #1e1e32;
+  z-index: 100;
+  box-shadow: 0 -2rpx 16rpx rgba(0, 0, 0, 0.3);
+}
+.bar-price {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+}
+.bar-price-label {
+  font-size: 22rpx;
+  color: #8e8e9a;
+}
+.bar-price-value {
+  font-size: 40rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+.bar-actions {
+  display: flex;
+  gap: 12rpx;
+}
+.bar-btn {
+  padding: 18rpx 28rpx;
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.bar-btn-text {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-weight: bold;
+}
+.bar-btn-contact {
+  background-color: #3d5a80;
+}
+.bar-btn-free {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
