@@ -19,7 +19,7 @@ App({
         name: '丰田普拉多 2025款',
         specs: '8挡手自一体 | 2.4T 双擎 | 4门5座',
         features: '全时四驱 | 360°全景影像 | 可放4个28寸行李箱',
-        tags: ['豪华SUV', '硬派越野'],
+        tags: ['豪华SUV', '臻品越野'],
         price: 598,
         unit: '车/日',
         category: 'SUV',
@@ -27,6 +27,28 @@ App({
       },
       {
         id: 2,
+        name: '丰田普拉多 2025款',
+        specs: '8挡手自一体 | 2.4T 双擎 | 4门5座',
+        features: '全时四驱 | 360°全景影像 | 可放4个28寸行李箱',
+        tags: ['豪华SUV', '臻品越野'],
+        price: 598,
+        unit: '车/日',
+        category: 'SUV',
+        image: '/images/car-prado.png'
+      },
+      {
+        id: 3,
+        name: '丰田普拉多 2025款',
+        specs: '8挡手自一体 | 2.4T 双擎 | 4门5座',
+        features: '全时四驱 | 360°全景影像 | 可放4个28寸行李箱',
+        tags: ['豪华SUV', '臻品越野'],
+        price: 598,
+        unit: '车/日',
+        category: 'SUV',
+        image: '/images/car-prado.png'
+      },
+      {
+        id: 4,
         name: '丰田兰德酷路泽 2024款',
         specs: '6挡手自一体 | 4.0L V6 | 5门8座',
         features: '全时四驱 | 差速锁 | 越野模式选择',
@@ -37,7 +59,7 @@ App({
         image: '/images/car-lc.png'
       },
       {
-        id: 3,
+        id: 5,
         name: '坦克300 2024款',
         specs: '9挡手自一体 | 2.0T | 4门5座',
         features: '分时四驱 | 前后桥差速锁 | 越野蠕行',

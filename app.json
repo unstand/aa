@@ -42,7 +42,7 @@
       },
       {
         "pagePath": "pages/schedule/schedule",
-        "text": "行程",
+        "text": "计划",
         "iconPath": "images/tab-calendar.png",
         "selectedIconPath": "images/tab-calendar-active.png"
       }

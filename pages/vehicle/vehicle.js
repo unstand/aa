@@ -44,6 +44,8 @@ Page({
     this.filterVehicles()
   },
 
+  onMoreMenu() {},
+
   onVehicleTap(e) {
     const id = e.currentTarget.dataset.id
     wx.navigateTo({

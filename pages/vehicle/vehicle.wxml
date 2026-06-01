@@ -1,58 +1,60 @@
 <!--pages/vehicle/vehicle.wxml-->
 <view class="vehicle-page">
-  <!-- 搜索栏 -->
+  <!-- 顶部搜索栏 -->
   <view class="search-bar">
-  <view class="search-icon-wrap">
-    <!-- 如果有图标放这里，没有就留空 -->
+    <view class="search-inner">
+      <input 
+        class="search-input" 
+        placeholder="想要找什么车？" 
+        placeholder-class="search-placeholder" 
+        bindinput="onSearchInput" 
+        value="{{searchKeyword}}" 
+      />
+      <image class="search-icon" src="/images/sousuo.png" mode="aspectFit" />
+    </view>
+    <view class="search-more" bindtap="onMoreMenu">
+      <view class="more-dots">
+        <view class="dot"></view>
+        <view class="dot"></view>
+        <view class="dot"></view>
+      </view>
+    </view>
   </view>
-  <input 
-    class="search-input" 
-    placeholder="你在找什么车？" 
-    placeholder-class="search-placeholder" 
-    bindinput="onSearchInput" 
-    value="{{searchKeyword}}" 
-  />
-  <!-- 右侧搜索图标 -->
-  <image 
-    class="search-icon"
-    src="/images/sousuo.png"
-    mode="aspectFit"
-  />
-  <!-- 右侧更多选项 -->
-  <view class="search-more" bindtap="onMoreMenu">
-    <!-- 如果你想模仿图片，这里可以不放内容 -->
-  </view>
-</view>
 
+  <!-- 主体内容 -->
   <view class="main-content">
     <!-- 左侧分类导航 -->
-    <scroll-view scroll-y class="category-sidebar">
+    <scroll-view scroll-y class="category-sidebar" enhanced show-scrollbar="{{false}}">
       <view class="category-item {{activeCategory === index ? 'active' : ''}}" 
             wx:for="{{categories}}" wx:key="index" 
             bindtap="onCategoryTap" data-index="{{index}}">
         <text class="cat-name">{{item.name}}</text>
-        <text class="cat-price">¥{{item.price}}起</text>
-        <view class="cat-underline" wx:if="{{activeCategory === index}}"></view>
+        <text class="cat-price">¥{{item.price}}/起</text>
+        <view class="cat-indicator" wx:if="{{activeCategory === index}}"></view>
       </view>
     </scroll-view>
 
     <!-- 右侧车辆列表 -->
-    <scroll-view scroll-y class="vehicle-list">
+    <scroll-view scroll-y class="vehicle-list" enhanced show-scrollbar="{{false}}">
       <view class="vehicle-card" wx:for="{{filteredVehicles}}" wx:key="id" bindtap="onVehicleTap" data-id="{{item.id}}">
-        <!-- 车辆图片 -->
+        <!-- 车辆图片区域 -->
         <view class="vehicle-img">
           <view class="vehicle-img-placeholder">
             <text class="vehicle-icon">🚗</text>
+          </view>
+          <!-- 右上角抖音图标 -->
+          <view class="video-badge">
+            <text class="video-icon">♪</text>
           </view>
         </view>
         <!-- 车辆信息 -->
         <view class="vehicle-info">
           <text class="vehicle-name">{{item.name}}</text>
+          <view class="vehicle-tags">
+            <text class="vtag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
+          </view>
           <text class="vehicle-specs">{{item.specs}}</text>
           <text class="vehicle-features">{{item.features}}</text>
-          <view class="vehicle-tags">
-            <text class="tag tag-gray" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="index">{{tag}}</text>
-          </view>
           <text class="vehicle-price">¥{{item.price}}/{{item.unit}}</text>
         </view>
       </view>
@@ -61,6 +63,7 @@
       <view class="empty-state" wx:if="{{filteredVehicles.length === 0}}">
         <text class="empty-text">暂无该类别车辆</text>
       </view>
+      <view class="list-bottom-space"></view>
     </scroll-view>
   </view>
 </view>
